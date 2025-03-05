@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connect</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="logo"></div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="expertise.html">Our expertise</a>
+        <a href="service.html">Services</a>
+        <a href="connect.html">Connect</a>
+      </div>
+    </div>
+    <div class="connect_form">
+      <div class="connect_content">
+        <div class="right_form-part">
+          <p>Reach Us</p>
+          <p>
+            Reach out to our information team directly for immediate assistance
+            with all inquiries.
+          </p>
+          <p>Dornan Technologies LLC</p>
+          <p>67 South Bedford St.</p>
+          <p>Suite 400 West</p>
+          <p>Burlington, MA 01803</p>
+          <p>Linked In :-</p>
+          <span class="span-tag">Visit Dornan Tech</span>
+          <p>Phone no: 508-948-0274</p>
+          <p>Email: info@dornantech.com</p>
+        </div>
+        <div class="left_form-part">
+          <form id="form">
+            <p>Enter Name</p>
+            <input type="text" name="name" />
+            <p>Enter Email</p>
+            <input type="email" name="email" />
+            <p>Enter Phone</p>
+            <input type="tel" name="phno" />
+            <p>Subject</p>
+            <input type="text" name="subject" />
+            <p>Message</p>
+            <input type="text" name="message" size="400" />
+            <button type="submit">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="logo">
+        <div class="img"></div>
+        <p>SOCIAL MEDIA</p>
+        <div class="icons">
+          <i class="fa-brands fa-skype"></i>
+          <i class="fa-brands fa-facebook-f"></i>
+          <i class="fa-brands fa-google-plus-g"></i>
+          <i class="fa-brands fa-twitter"></i>
+          <i class="fa-brands fa-vimeo"></i>
+          <i class="fa-solid fa-play"></i>
+          <i class="fa-brands fa-discord"></i>
+          <i class="fa-brands fa-linkedin-in"></i>
+        </div>
+
+        <button>Join Talent Network</button>
+      </div>
+      <div class="short">
+        <p>SHORT LINKS</p>
+        <div class="lists">
+          <ul>
+            <li>Home</li>
+            <li>Our expertise</li>
+            <li>Services</li>
+            <li>Connect</li>
+          </ul>
+          <ul>
+            <li>Salesforce</li>
+            <li>Mulesoft</li>
+            <li>Amazon Web Services</li>
+            <li>Microsoft Azure</li>
+          </ul>
+        </div>
+      </div>
+      <div class="connect">
+        <p>CONNECT</p>
+        <p>
+          <i class="fa-solid fa-house"></i> :Dornan Technologies LLC<br />
+          67 South Bedford St.<br />
+          Suite 400 West<br />
+          Burlington, MA 01803
+        </p>
+        <p><i class="fa-solid fa-phone"></i> : 508-948-0274</p>
+        <p><i class="fa-solid fa-envelope"></i> : info@dornantech.com</p>
+      </div>
+    </div>
+    <div class="foot">
+      <p>
+        &#169; 2019 DornanTech - Designed & Developed by Areksoft Technologies
+      </p>
+    </div>
+  </body>
+  <script>
+    let formElement = document.getElementById("form");
+    formElement.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      let { name, email, phno, message, subject } = e.target;
+      await fetch("http://localhost:3003/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.value,
+          email: email.value,
+          subject: subject.value,
+          message: message.value,
+          phno: phno.value,
+        }),
+      }).then((data) => {
+        if (data.status === 200) {
+          alert("Message sent successfully");
+          name.value = "";
+          phno.value = "";
+          email.value = "";
+          subject.value = "";
+          message.value = "";
+        } else {
+          alert("Error sending message, try again");
+        }
+      });
+    });
+  </script>
+</html>
